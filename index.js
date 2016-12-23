@@ -4,7 +4,13 @@ const fs = require('fs')
 const request = require('superagent')
 const Sequelize = require('sequelize')
 const bunyan = require('bunyan')
-const log = bunyan.createLogger({name: 'daily-rate'})
+const log = bunyan.createLogger({
+  name: 'sage-daily-rate',
+  streams: [
+    { stream: process.stdout },
+    { path: 'sage-daily-rate.log' }
+  ]
+})
 
 const getModels = require('./models')
 const settings = JSON.parse(fs.readFileSync(`./settings.json`))
